@@ -1,0 +1,28 @@
+<h2 class="right">Сировини</h2>
+
+<table class="ui orange selectable celled table">
+  <thead>
+    <tr>
+      <th>Сировина</th>
+      <th>Ціна</th>
+      <th>Залишок</th>
+      <th>Ліміт</th>
+      <th>Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of data" [class.warning]="item.quantity === item.limit" [class.negative]="item.quantity < item.limit">
+      <td>
+        <i class="sort numeric descending icon" *ngIf="item.status !== 0"></i>
+        <a [routerLink]="['/show', item.id]"><b>{{ item.name }}</b></a>
+      </td>
+      <td>{{ item.actualPrice }}</td>
+      <td><i class="warning sign icon" *ngIf="item.quantity <= item.limit"></i>{{ item.quantity }}</td>
+      <td>{{ item.limit }}</td>
+      <td>
+          <i class="thumbs down icon" *ngIf="!item.status"></i>
+          <i class="thumbs outline up icon" *ngIf="item.status"></i>
+      </td>
+    </tr>
+  </tbody>
+</table>

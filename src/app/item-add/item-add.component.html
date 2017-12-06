@@ -1,0 +1,44 @@
+<div class="ui raised segment">
+  <h2 class="ui header">Додати сировину</h2>
+  <form
+    [formGroup]="addForm"
+    (ngSubmit)="onSubmit(addForm.value)"
+    class="ui form">
+    <div class="field">
+      <label for="article">Артикул</label>
+      <input
+        type="text"
+        id="rawArticle"
+        placeholder="АБВ00123"
+        [formControl]="addForm.controls['article']">
+        <div *ngIf="article.hasError('required')" class="ui error message" >
+          Поле "Артикул" є обов'язковим до заповнення!
+        </div>
+    </div>
+    <div class="field">
+      <label for="name">Назва</label>
+      <input
+        type="text"
+        id="rawName"
+        placeholder="Назва сировини"
+        [formControl]="addForm.controls['name']">
+        <div class="ui error message" *ngIf="name.hasError('required')">
+          Поле "Назва" є обов'язковим до заповнення!
+        </div>
+    </div>
+    <div class="field">
+      <label for="limit">Ліміт</label>
+      <input
+        type="text"
+        id="limit"
+        placeholder="0-100"
+        [formControl]="addForm.controls['limit']">
+        <div *ngIf="limit.hasError('required')" class="ui error message" >
+          Поле "Ліміт" є обов'язковим до заповнення!
+        </div>
+    </div>
+    <button class="ui button green">Зберегти</button>
+
+    <div *ngIf="!addForm.valid" class="ui error message" >Форма заповнена некоректно!</div>
+  </form>
+</div>

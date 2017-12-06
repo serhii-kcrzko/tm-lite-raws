@@ -1,0 +1,49 @@
+<div class="ui raised segment">
+  <div *ngIf="raw">
+    <h2>{{ raw.name }}</h2>
+
+    <table class="ui orange selectable celled table">
+      <thead>
+        <th>Показник</th>
+        <th>Значення</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Артикул</td>
+          <td>{{ raw.article }}</td>
+        </tr>
+        <tr>
+          <td>Ліміт</td>
+          <td>{{ raw.limit }}</td>
+        </tr>
+        <tr>
+          <td>Статус</td>
+          <td>{{ raw.status }}</td>
+        </tr>
+        <tr>
+          <td>Кількість</td>
+          <td>{{ raw.quantity }}</td>
+        </tr>
+        <tr>
+          <td>Прогнозована потреба</td>
+          <td>{{ raw.prognosedNeed }}</td>
+        </tr>
+        <tr>
+          <td>Прогнозована ціна</td>
+          <td>{{ raw.prognosedPrice }}</td>
+        </tr>
+        <tr>
+          <td>Фактична ціна</td>
+          <td>{{ raw.actualPrice }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <div class="ui raised segment">
+    <chart [options]="priceOptions"></chart>
+  </div>
+  <div class="ui raised segment">
+    <chart [options]="needOptions"></chart>
+  </div>

@@ -1,0 +1,48 @@
+<div class="ui raised segment">
+  <h2 class="ui header">Редагувати сировину</h2>
+  <h3 class="ui header">(#{{ raw.article }})</h3>
+  <form
+    [formGroup]="editForm"
+    (ngSubmit)="onSubmit(editForm.value)"
+    class="ui form">
+    <div class="field">
+      <label for="article">Артикул</label>
+      <input
+        type="text"
+        id="rawArticle"
+        placeholder="{{ raw.article }}"
+        [formControl]="editForm.controls['article']">
+        <div *ngIf="article.hasError('required')" class="ui error message" >
+          Поле "Артикул" є обов'язковим до заповнення!
+        </div>
+    </div>
+    <div class="field">
+      <label for="name">Назва</label>
+      <input
+        type="text"
+        id="rawName"
+        placeholder="{{ raw.name }}"
+        [formControl]="editForm.controls['name']">
+        <div class="ui error message" *ngIf="name.hasError('required')">
+          Поле "Назва" є обов'язковим до заповнення!
+        </div>
+    </div>
+    <div class="field">
+      <label for="limit">Ліміт</label>
+      <input
+        type="text"
+        id="limit"
+        placeholder="{{ raw.limit }}"
+        [formControl]="editForm.controls['limit']">
+        <div *ngIf="limit.hasError('required')" class="ui error message" >
+          Поле "Ліміт" є обов'язковим до заповнення!
+        </div>
+    </div>
+      <button class="ui positive button" (click)="onSubmit()">Зберегти</button>
+      <button class="ui negative button" (click)="delete()">Видалити</button>
+
+    <div *ngIf="!editForm.valid" class="ui error message" >Форма заповнена некоректно!</div>
+  </form>
+</div>
+
+<code>{{raw}}</code>
