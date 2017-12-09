@@ -12,6 +12,7 @@ export class ItemAddComponent implements OnInit {
   article: AbstractControl;
   name: AbstractControl;
   limit: AbstractControl;
+  saved: boolean;
 
   constructor(fb: FormBuilder, private http: Http) {
     this.addForm = fb.group({
@@ -28,7 +29,8 @@ export class ItemAddComponent implements OnInit {
   ngOnInit() {}
 
   onSubmit(value: string): void {
+    this.saved = true;
     this.http.post('http://localhost:9000/raws', this.addForm.value)
-      .subscribe((data) => this.addForm.reset());
+      .subscribe((data) => { this.addForm.reset(); this.saved = false; });
   }
 }

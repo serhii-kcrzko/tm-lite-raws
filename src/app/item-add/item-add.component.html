@@ -37,6 +37,16 @@
           Поле "Ліміт" є обов'язковим до заповнення!
         </div>
     </div>
+
+    <div *ngIf="!saved" class="ui teal message">
+        <i class="write icon"></i>
+        Заповніть принаймні одне поле
+    </div>
+    <div *ngIf="saved" class="ui green message">
+        <i class="send icon"></i>
+        Зміни збережено!
+      </div>
+
     <button class="ui button green">Зберегти</button>
 
     <div *ngIf="!addForm.valid" class="ui error message" >Форма заповнена некоректно!</div>
