@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
-
 import { BackendService } from '../backend.service';
+import { sortBy } from 'lodash/sortBy';
+
+import * as moment from 'moment';
+import 'moment/locale/uk';
+moment.locale('uk');
 
 @Component({
   selector: 'app-item-edit',
@@ -10,15 +14,11 @@ import { BackendService } from '../backend.service';
   styleUrls: ['./item-edit.component.css']
 })
 export class ItemEditComponent implements OnInit {
-// private apiUrl = 'http://localhost:9000';
 data: any = {};
 
   constructor(private http: Http, private db: BackendService) { }
 
   getData() {
-    // return this.http.get(`${this.apiUrl}/raws`)
-    //   .map((res: Response) => res.json());
-
     return this.db.getRaws();
   }
 
@@ -31,5 +31,21 @@ data: any = {};
   ngOnInit() {
     this.getRaws();
     this.getData();
+  }
+
+  parseDate(date: string): string {
+    const parsedDate = moment(date);
+    return parsedDate.format('D MMMM YYYY, hh:mm:ss');
+  }
+
+  capitalize(string: string): string {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+  parseUser(email: string): string {
+    const login = email.split('@')[0];
+    const userName = login.split('.');
+    const [name, surname] = userName;
+    return `${this.capitalize(name)} ${this.capitalize(surname)}`;
   }
 }
