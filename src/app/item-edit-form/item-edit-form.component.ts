@@ -51,7 +51,7 @@ export class ItemEditFormComponent implements OnInit {
     this.raw = res;
   }
 
-  onSubmit(value: string): void {
+  onSubmit(): void {
     this.saved = true;
     const update = this.editForm.value;
     this.raw.article = update.article && update.article.length ? update.article : this.raw.article;

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ChartModule } from 'angular2-highcharts';
 
 import { AUTH_PROVIDERS } from './auth.service';
 import { BACKEND_PROVIDERS } from './backend.service';
@@ -17,8 +16,16 @@ import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
 import { ItemEditFormComponent } from './item-edit-form/item-edit-form.component';
 
-import 'zone.js';
-import 'reflect-metadata';
+import { ChartModule } from 'angular2-highcharts';
+import * as highcharts from 'highcharts';
+import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
+
+
+export function highchartsFactory() {
+  const hc = require('highcharts');
+
+  return hc;
+}
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -48,13 +55,17 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot(routes),
-    ChartModule.forRoot(require('highcharts'))
+    ChartModule
   ],
   providers: [
     AUTH_PROVIDERS,
     BACKEND_PROVIDERS,
     LoggedInGuard,
-    AppComponent
+    AppComponent,
+    {
+      provide: HighchartsStatic,
+      useFactory: highchartsFactory
+    }
   ],
   bootstrap: [AppComponent]
 })

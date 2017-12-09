@@ -1,7 +1,7 @@
 <div class="ui raised segment">
   <h2 class="ui header">Редагувати сировину</h2>
   <h3 class="ui header">#{{ raw.article }}</h3>
-  <form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm.value)" class="ui form">
+  <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="ui form">
     <div class="field">
       <label for="article">Артикул</label>
       <input type="text" id="rawArticle" placeholder="{{ raw.article }}" [formControl]="editForm.controls['article']">
