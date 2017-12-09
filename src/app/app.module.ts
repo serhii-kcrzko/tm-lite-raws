@@ -17,6 +17,9 @@ import { ItemComponent } from './item/item.component';
 import { LoginComponent } from './login/login.component';
 import { ItemEditFormComponent } from './item-edit-form/item-edit-form.component';
 
+import 'zone.js';
+import 'reflect-metadata';
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'show', component: ItemListComponent, canActivate: [LoggedInGuard], pathMatch: 'full'  },
