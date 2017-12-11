@@ -1,54 +1,50 @@
+<!-- BREADCRUMBS -->
+<span>
+    <div class="ui label">
+      <a href="/add">
+        <i class="settings icon"></i>Додати сировину</a>
+    </div>
+  </span>
+
 <div class="ui raised segment">
   <h2 class="ui header">Додати сировину</h2>
-  <form
-    [formGroup]="addForm"
-    (ngSubmit)="onSubmit(addForm.value)"
-    class="ui form">
+  <form [formGroup]="addForm" (ngSubmit)="onSubmit(addForm.value)" class="ui form">
     <div class="field">
-      <label for="article">Артикул</label>
-      <input
-        type="text"
-        id="rawArticle"
-        placeholder="АБВ00123"
-        [formControl]="addForm.controls['article']">
-        <div *ngIf="article.hasError('required')" class="ui error message" >
-          Поле "Артикул" є обов'язковим до заповнення!
-        </div>
+      <label for="rawArticle">Артикул</label>
+      <input type="text" id="rawArticle" class="form-control" formControlName="article" placeholder="АБВ00123" required>
+      <div *ngIf="article.hasError('required') || article.hasError('minlength')" class="ui pointing red basic label">
+        Поле "Артикул" є обов'язковим до заповнення!
+      </div>
     </div>
     <div class="field">
       <label for="name">Назва</label>
-      <input
-        type="text"
-        id="rawName"
-        placeholder="Назва сировини"
-        [formControl]="addForm.controls['name']">
-        <div class="ui error message" *ngIf="name.hasError('required')">
-          Поле "Назва" є обов'язковим до заповнення!
-        </div>
+      <input type="text" id="rawName" placeholder="Назва сировини" [formControl]="addForm.controls['name']" required>
+      <div class="ui pointing red basic label" *ngIf="name.hasError('required') || name.hasError('minlength')">
+        Поле "Назва" є обов'язковим до заповнення!
+      </div>
     </div>
     <div class="field">
       <label for="limit">Ліміт</label>
-      <input
-        type="text"
-        id="limit"
-        placeholder="0-100"
-        [formControl]="addForm.controls['limit']">
-        <div *ngIf="limit.hasError('required')" class="ui error message" >
-          Поле "Ліміт" є обов'язковим до заповнення!
-        </div>
+      <input type="text" id="limit" placeholder="0-100" [formControl]="addForm.controls['limit']" required>
+      <div *ngIf="limit.hasError('required') || limit.hasError('minlength')" class="ui pointing red basic label">
+        Поле "Ліміт" є обов'язковим до заповнення!
+      </div>
     </div>
 
     <div *ngIf="!saved" class="ui teal message">
-        <i class="write icon"></i>
-        Заповніть усі поля
+      <i class="write icon"></i>
+      Заповніть усі поля
     </div>
     <div *ngIf="saved" class="ui green message">
-        <i class="send icon"></i>
-        Зміни збережено!
-      </div>
+      <i class="send icon"></i>
+      Зміни збережено!
+    </div>
+    <div *ngIf="!addForm.valid && name.touched && article.touched && limit.touched" class="ui message negative">
+      <i class="warning sign icon"></i>
+      Форма заповнена некоректно!
+    </div>
 
-    <button class="ui button green">Зберегти</button>
+    <button class="ui button green" type="submit" [disabled]="!addForm.valid">Зберегти</button>
 
-    <div *ngIf="!addForm.valid" class="ui error message" >Форма заповнена некоректно!</div>
   </form>
 </div>

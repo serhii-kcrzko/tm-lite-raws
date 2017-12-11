@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { Http } from '@angular/http';
+
+import { BackendService } from '../backend.service';
 
 @Component({
   selector: 'app-item-add',
@@ -14,11 +16,11 @@ export class ItemAddComponent implements OnInit {
   limit: AbstractControl;
   saved: boolean;
 
-  constructor(fb: FormBuilder, private http: Http) {
+  constructor(fb: FormBuilder, private http: Http, private db: BackendService) {
     this.addForm = fb.group({
-      'article': ['', Validators.required],
-      'name': ['', Validators.required],
-      'limit': ['', Validators.required]
+      'article': ['', [Validators.required, Validators.minLength(8)]],
+      'name': ['', [Validators.required, Validators.minLength(1)]],
+      'limit': ['', [Validators.required, Validators.minLength(1)]]
     });
 
     this.article = this.addForm.controls['article'];
@@ -26,11 +28,13 @@ export class ItemAddComponent implements OnInit {
     this.limit = this.addForm.controls['limit'];
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(this.addForm.controls);
+  }
 
   onSubmit(value: string): void {
     this.saved = true;
-    this.http.post('http://localhost:9000/raws', this.addForm.value)
+    this.db.putRaw(value)
       .subscribe((data) => { this.addForm.reset(); this.saved = false; });
   }
 }

@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class BackendService {
-  static BASE_URL = process.env.BACKEND_DB || 'http://localhost:9000';
+  static BASE_URL = process.env.BACKEND_DB || 'http://tm-lite-db.herokuapp.com';
 
   constructor(private http: Http) { }
 
@@ -29,6 +29,10 @@ export class BackendService {
   deleteItem(id: string) {
     return this.http.delete(`${BackendService.BASE_URL}/raws/${id}`)
       .map((res: any) => res.json());
+  }
+
+  putRaw(value: any) {
+    return this.http.post(`${BackendService.BASE_URL}/raws`, value);
   }
 }
 
