@@ -6,14 +6,13 @@
   </div>
 </span>
 
-<h2 class="right">Історія редагування</h2>
+<h2 class="right">Сировини</h2>
 
 <table class="ui orange selectable celled table">
   <thead>
     <tr>
       <th>Сировина</th>
-      <th>Дата створення</th>
-      <th>Дата редагування</th>
+      <th>Дата останнього редагування</th>
       <th>Користувач</th>
       <th></th>
     </tr>
@@ -23,7 +22,6 @@
       <td>
         <a [routerLink]="['/edit', item.id]">{{ item.name }}</a>
       </td>
-      <td>{{ parseDate(item.createdAt) }}</td>
       <td>{{ parseDate(item.updatedAt) }}</td>
       <td>{{ parseUser('serhii.kocherezhko@outlook.com') }}</td>
       <td class="collapsing">
@@ -36,5 +34,3 @@
     </tr>
   </tbody>
 </table>
-
-<pre>{{ getLocation() }}</pre>

@@ -15,7 +15,7 @@ moment.locale('uk');
   styleUrls: ['./item-edit.component.css']
 })
 export class ItemEditComponent implements OnInit {
-  data: any = {};
+  data: any = [];
 
   constructor(private http: Http, private db: BackendService, private router: Router) { }
 
@@ -24,9 +24,7 @@ export class ItemEditComponent implements OnInit {
   }
 
   getRaws() {
-    this.getData().subscribe(data => {
-      this.data = data;
-    });
+    this.getData().subscribe(res => this.data = res);
   }
 
   ngOnInit() {
@@ -44,7 +42,6 @@ export class ItemEditComponent implements OnInit {
   }
 
   getLocation(): string {
-    console.log(this.router.url);
     return this.router.url;
   }
 
