@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, A
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Http } from '@angular/http';
-import { Router } from '@angular/router';
 
 import { BackendService } from '../backend.service';
 
@@ -18,14 +17,14 @@ export class ItemEditFormComponent implements OnInit {
   name: AbstractControl;
   limit: AbstractControl;
   id: string;
-  raw: any;
+  raw: any = {};
   saved: boolean;
 
   constructor(fb: FormBuilder, private http: Http, private route: ActivatedRoute, private db: BackendService, private location: Location) {
     this.editForm = fb.group({
-      'article': ['', Validators.required],
-      'name': ['', Validators.required],
-      'limit': ['', Validators.required]
+      'article': ['', [Validators.minLength(8)]],
+      'name': ['', [Validators.minLength(1)]],
+      'limit': ['', [Validators.minLength(1)]]
     });
 
     this.saved = false;
@@ -56,19 +55,14 @@ export class ItemEditFormComponent implements OnInit {
     const update = this.editForm.value;
     this.raw.article = update.article && update.article.length ? update.article : this.raw.article;
     this.raw.name = update.name && update.name.length ? update.name : this.raw.name;
-    this.raw.limit = update.limit !== this.raw.limit ? update.limit : this.raw.limit;
+    this.raw.limit = update.limit && (update.limit !== this.raw.limit) ? update.limit : this.raw.limit;
 
-    this.http.put(`http://localhost:9000/raws/${this.raw.id}`, this.raw)
+    this.db.updateRaw(this.raw.id, this.raw)
       .subscribe((data) => { this.editForm.reset(); this.saved = false; });
   }
 
   delete(): void {
-    this.http.delete(`http://localhost:9000/raws/${this.raw.id}`)
-    .subscribe((data) => this.location.back());
-  }
-
-  getLocation(): string {
-    console.log(this.router.url);
-    return this.router.url;
+    this.db.deleteRaw(this.raw.id)
+      .subscribe((data) => this.location.back());
   }
 }

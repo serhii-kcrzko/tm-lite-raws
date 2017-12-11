@@ -26,13 +26,17 @@ export class BackendService {
     return this.query(`/raws/${id}`);
   }
 
-  deleteItem(id: string) {
+  deleteRaw(id: string) {
     return this.http.delete(`${BackendService.BASE_URL}/raws/${id}`)
       .map((res: any) => res.json());
   }
 
   putRaw(value: any) {
     return this.http.post(`${BackendService.BASE_URL}/raws`, value);
+  }
+
+  updateRaw(id: string, value: any) {
+    return this.http.put(`${BackendService.BASE_URL}/raws/${id}`, value);
   }
 }
 
