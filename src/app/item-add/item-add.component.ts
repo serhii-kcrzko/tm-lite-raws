@@ -28,9 +28,7 @@ export class ItemAddComponent implements OnInit {
     this.limit = this.addForm.controls['limit'];
   }
 
-  ngOnInit() {
-    console.log(this.addForm.controls);
-  }
+  ngOnInit() { }
 
   onSubmit(value: string): void {
     this.saved = true;
