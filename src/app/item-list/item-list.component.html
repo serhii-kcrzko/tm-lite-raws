@@ -1,27 +1,42 @@
+<span>
+  <div class="ui basic label">
+    <a href="/show">
+      <i class="money icon"></i>Статистика та перегляд</a>
+  </div>
+</span>
+
 <h2 class="right">Сировини</h2>
 
-<table class="ui orange selectable celled table">
+<table class="ui orange selectable table">
   <thead>
     <tr>
       <th>Сировина</th>
       <th>Ціна</th>
       <th>Залишок</th>
       <th>Ліміт</th>
-      <th>Статус</th>
+      <th class="two wide right aligned">Статус</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let item of data" [class.warning]="item.quantity === item.limit" [class.negative]="item.quantity < item.limit">
       <td>
-        <i class="sort numeric descending icon" *ngIf="item.status !== 0"></i>
-        <a [routerLink]="['/show', item.id]"><b>{{ item.name }}</b></a>
+        <div class="ui ribbon label" [class.blue]="item.status" [class.white]="!item.status">
+          <i class="star icon"></i>
+        </div>
+        <a [routerLink]="['/show', item.id]">
+          <b>{{ item.name }}</b>
+        </a>
       </td>
-      <td>{{ item.actualPrice }}</td>
-      <td><i class="warning sign icon" *ngIf="item.quantity <= item.limit"></i>{{ item.quantity }}</td>
+      <td>₴{{ item.actualPrice }}</td>
+      <td>
+        <i class="warning sign icon" *ngIf="item.quantity <= item.limit"></i>{{ item.quantity }}</td>
       <td>{{ item.limit }}</td>
       <td>
+        <div class="ui right ribbon label" [class.red]="!item.status" [class.green]="item.status">
           <i class="thumbs down icon" *ngIf="!item.status"></i>
           <i class="thumbs outline up icon" *ngIf="item.status"></i>
+          ₴39.95
+        </div>
       </td>
     </tr>
   </tbody>
