@@ -1,3 +1,11 @@
+<!-- BREADCRUMBS -->
+<span>
+  <div class="ui label">
+    <a href="/edit">
+      <i class="settings icon"></i> Редагувати сировину</a>
+  </div>
+</span>
+
 <h2 class="right">Історія редагування</h2>
 
 <table class="ui orange selectable celled table">
@@ -20,9 +28,13 @@
       <td>{{ parseUser('serhii.kocherezhko@outlook.com') }}</td>
       <td class="collapsing">
         <div class="ui fitted checkbox">
-          <a [routerLink]="['/edit', item.id]"><i class="setting icon"></i></a>
+          <a [routerLink]="['/edit', item.id]">
+            <i class="setting icon"></i>
+          </a>
         </div>
       </td>
     </tr>
   </tbody>
 </table>
+
+<pre>{{ getLocation() }}</pre>

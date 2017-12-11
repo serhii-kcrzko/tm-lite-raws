@@ -3,6 +3,7 @@ import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { BackendService } from '../backend.service';
 import { sortBy } from 'lodash/sortBy';
+import { Router } from '@angular/router';
 
 import * as moment from 'moment';
 import 'moment/locale/uk';
@@ -14,9 +15,9 @@ moment.locale('uk');
   styleUrls: ['./item-edit.component.css']
 })
 export class ItemEditComponent implements OnInit {
-data: any = {};
+  data: any = {};
 
-  constructor(private http: Http, private db: BackendService) { }
+  constructor(private http: Http, private db: BackendService, private router: Router) { }
 
   getData() {
     return this.db.getRaws();
@@ -40,7 +41,12 @@ data: any = {};
 
   capitalize(string: string): string {
     return string.charAt(0).toUpperCase() + string.slice(1);
-}
+  }
+
+  getLocation(): string {
+    console.log(this.router.url);
+    return this.router.url;
+  }
 
   parseUser(email: string): string {
     const login = email.split('@')[0];

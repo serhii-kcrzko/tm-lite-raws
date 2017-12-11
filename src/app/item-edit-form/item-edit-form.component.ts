@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, FormsModule, ReactiveFormsModule, A
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { Http } from '@angular/http';
+import { Router } from '@angular/router';
 
 import { BackendService } from '../backend.service';
 
@@ -28,7 +29,6 @@ export class ItemEditFormComponent implements OnInit {
     });
 
     this.saved = false;
-
     this.article = this.editForm.controls['article'];
     this.name = this.editForm.controls['name'];
     this.limit = this.editForm.controls['limit'];
@@ -67,4 +67,8 @@ export class ItemEditFormComponent implements OnInit {
     .subscribe((data) => this.location.back());
   }
 
+  getLocation(): string {
+    console.log(this.router.url);
+    return this.router.url;
+  }
 }

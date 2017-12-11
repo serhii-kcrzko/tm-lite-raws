@@ -1,3 +1,13 @@
+<!-- BREADCRUMBS-->
+<span>
+  <div class="ui label">
+      <a href="/edit"> <i class="settings icon"></i> Редагувати сировину</a>
+  </div> >
+   <div class="ui label">
+      <a href="/edit/{{ raw.id }}"> {{ raw.name }}</a>
+   </div>
+  </span>
+
 <div class="ui raised segment">
   <h2 class="ui header">Редагувати сировину</h2>
   <h3 class="ui header">#{{ raw.article }}</h3>
@@ -38,3 +48,5 @@
     <div *ngIf="!editForm.valid" class="ui error message">Форма заповнена некоректно!</div>
   </form>
 </div>
+
+<pre>{{ getLocation() }}</pre>
