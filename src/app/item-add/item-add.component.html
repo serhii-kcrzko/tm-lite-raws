@@ -12,21 +12,21 @@
     <div class="field">
       <label for="rawArticle">Артикул</label>
       <input type="text" id="rawArticle" class="form-control" formControlName="article" placeholder="АБВ00123" required>
-      <div *ngIf="(article.hasError('required') || article.hasError('minlength')) && article.touched" class="ui pointing red basic label">
+      <div *ngIf="(article.hasError('required') || article.hasError('minlength')) && !article.pristine" class="ui pointing red basic label">
         Поле "Артикул" є обов'язковим до заповнення!
       </div>
     </div>
     <div class="field">
       <label for="name">Назва</label>
       <input type="text" id="rawName" placeholder="Назва сировини" [formControl]="addForm.controls['name']" required>
-      <div *ngIf="(name.hasError('required') || name.hasError('minlength')) && name.touched" class="ui pointing red basic label">
+      <div *ngIf="(name.hasError('required') || name.hasError('minlength')) && !name.pristine" class="ui pointing red basic label">
         Поле "Назва" є обов'язковим до заповнення!
       </div>
     </div>
     <div class="field">
       <label for="limit">Ліміт</label>
       <input type="text" id="limit" placeholder="0-100" [formControl]="addForm.controls['limit']" required>
-      <div *ngIf="(limit.hasError('required') || limit.hasError('minlength')) && limit.touched" class="ui pointing red basic label">
+      <div *ngIf="(limit.hasError('required') || limit.hasError('minlength')) && !limit.pristine" class="ui pointing red basic label">
         Поле "Ліміт" є обов'язковим до заповнення!
       </div>
     </div>
@@ -39,7 +39,7 @@
       <i class="send icon"></i>
       Зміни збережено!
     </div>
-    <div *ngIf="!addForm.valid && name.touched && article.touched && limit.touched" class="ui message negative">
+    <div *ngIf="!addForm.valid && !name.pristine && !article.pristine && !limit.pristine" class="ui message negative">
       <i class="warning sign icon"></i>
       Форма заповнена некоректно!
     </div>

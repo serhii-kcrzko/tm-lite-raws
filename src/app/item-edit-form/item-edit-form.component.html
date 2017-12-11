@@ -16,21 +16,21 @@
     <div class="field">
       <label for="rawArticle">Артикул</label>
       <input type="text" id="rawArticle" placeholder="{{ raw.article }}" [formControl]="editForm.controls['article']">
-      <div *ngIf="article.hasError('minlength') && article.touched" class="ui pointing red basic label">
+      <div *ngIf="article.hasError('minlength') && !article.pristine" class="ui pointing red basic label">
         Недопустиме значення! Введіть артикул формату "АБВ00001".
       </div>
     </div>
     <div class="field">
       <label for="name">Назва</label>
       <input type="text" id="rawName" placeholder="{{ raw.name }}" [formControl]="editForm.controls['name']">
-      <div *ngIf="name.hasError('minlength') && name.touched" class="ui pointing red basic label">
+      <div *ngIf="name.hasError('minlength') && !name.pristine" class="ui pointing red basic label">
         Поле "Назва" не має бути пустим!
       </div>
     </div>
     <div class="field">
       <label for="limit">Ліміт</label>
       <input type="text" id="limit" placeholder="{{ raw.limit }}" [formControl]="editForm.controls['limit']">
-      <div *ngIf="limit.hasError('minlength') && limit.touched" class="ui pointing red basic label">
+      <div *ngIf="limit.hasError('minlength') && !limit.pristine" class="ui pointing red basic label">
         Поле "Ліміт" не має бути пустим!
       </div>
     </div>
