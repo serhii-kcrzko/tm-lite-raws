@@ -35,7 +35,7 @@ export class ItemComponent implements OnInit {
   renderRaw(res: any): void {
     this.raw = res;
     this.priceOptions = {
-      title: { text: 'Ретроспектива ціни' },
+      title: { text: '' },
       series: [{ data: res.priceStatistics }],
       xAxis: {
         title: 'Дні'
@@ -48,7 +48,7 @@ export class ItemComponent implements OnInit {
       }
     };
     this.needOptions = {
-      title: { text: 'Ретроспектива попиту' },
+      title: { text: '' },
       series: [{ data: res.needStatistics }],
       xAxis: {
         title: 'Дні'
@@ -61,5 +61,4 @@ export class ItemComponent implements OnInit {
       }
     };
   }
-
 }

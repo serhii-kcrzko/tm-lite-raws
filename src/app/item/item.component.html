@@ -1,7 +1,50 @@
-<div class="ui raised segment">
-  <div *ngIf="raw">
-    <h2>{{ raw.name }}</h2>
+<!-- BREADCRUMBS-->
+<span>
+  <div class="ui basic label">
+    <a href="/show">
+      <i class="money icon"></i> Статистика та перегляд</a>
+  </div> >
+  <div class="ui basic label" *ngIf="raw && raw.name">
+    <a href="/edit/{{ id }}"> {{ raw.name }}</a>
+  </div>
+</span>
 
+<h2 *ngIf="raw">{{ raw.name }}</h2>
+
+<div class="ui segment" *ngIf="raw">
+  <table class="ui orange table celled">
+    <thead>
+      <th class="eight wide center aligned">Попит</th>
+      <th class="eight wide center aligned">Ціна</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="ui raised segment wrapper graph" *ngIf="raw" id="priceStats">
+            <div class="ui ribbon label" [class.blue]="raw.status" [class.white]="!raw.status">
+              <i class="star icon"></i>
+            </div>
+            <chart [options]="needOptions"></chart>
+          </div>
+        </td>
+        <td>
+          <div class="ui raised segment wrapper graph" *ngIf="raw" id="needStats">
+            <div class="ui right ribbon label" [class.red]="!raw.status" [class.green]="raw.status">
+              <i class="thumbs down icon" *ngIf="!raw.status"></i>
+              <i class="thumbs outline up icon" *ngIf="raw.status"></i>
+              ₴39.95
+            </div>
+            <chart [options]="priceOptions"></chart>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="ui raised segment" *ngIf="raw">
+  <div *ngIf="raw">
+    <h4>Деталі</h4>
     <table class="ui orange selectable celled table">
       <thead>
         <th>Показник</th>
@@ -39,11 +82,4 @@
       </tbody>
     </table>
   </div>
-</div>
-
-<div class="ui raised segment">
-  <chart [options]="priceOptions"></chart>
-</div>
-<div class="ui raised segment">
-  <chart [options]="needOptions"></chart>
 </div>
