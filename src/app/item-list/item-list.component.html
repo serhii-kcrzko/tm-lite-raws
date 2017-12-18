@@ -35,7 +35,7 @@
         <div class="ui right ribbon label" [class.red]="!item.status" [class.green]="item.status">
           <i class="thumbs down icon" *ngIf="!item.status"></i>
           <i class="thumbs outline up icon" *ngIf="item.status"></i>
-          ₴39.95
+          {{ item.prognosedPrice }}
         </div>
       </td>
     </tr>

@@ -23,7 +23,6 @@ import { HighchartsStatic } from 'angular2-highcharts/dist/HighchartsService';
 
 export function highchartsFactory() {
   const hc = require('highcharts');
-
   return hc;
 }
 
