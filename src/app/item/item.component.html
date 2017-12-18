@@ -29,10 +29,10 @@
         </td>
         <td>
           <div class="ui raised segment wrapper graph" *ngIf="raw" id="needStats">
-            <div class="ui right ribbon label" [class.red]="!raw.status" [class.green]="raw.status">
-              <i class="thumbs down icon" *ngIf="!raw.status"></i>
-              <i class="thumbs outline up icon" *ngIf="raw.status"></i>
-              ₴39.95
+            <div class="ui right ribbon label" [class.red]="item.actualPrice <= item.prognosedPrice" [class.green]="item.actualPrice > item.prognosedPrice">
+              <i class="thumbs down icon" *ngIf="item.actualPrice <= item.prognosedPrice"></i>
+              <i class="thumbs outline up icon" *ngIf="item.actualPrice > item.prognosedPrice"></i>
+              {{ item.prognosedPrice }}
             </div>
             <chart [options]="priceOptions"></chart>
           </div>
