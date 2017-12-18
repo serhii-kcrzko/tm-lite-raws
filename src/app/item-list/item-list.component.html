@@ -32,7 +32,7 @@
         <i class="warning sign icon" *ngIf="item.quantity <= item.limit"></i>{{ item.quantity }}</td>
       <td>{{ item.limit }}</td>
       <td>
-        <div class="ui right ribbon label" [class.red]="!item.status" [class.green]="item.status">
+        <div class="ui right ribbon label" [class.red]="item.actualPrice > item.prognosedPrice" [class.green]="item.actualPrice <= item.prognosedPrice">
           <i class="thumbs down icon" *ngIf="!item.status"></i>
           <i class="thumbs outline up icon" *ngIf="item.status"></i>
           {{ item.prognosedPrice }}
